@@ -1,9 +1,9 @@
-import path from 'path'
-import unzipper from 'unzipper'
-import tar from 'tar'
 import { execa } from 'execa'
 import fs from 'fs-extra'
 import os from 'os'
+import path from 'path'
+import tar from 'tar'
+import unzipper from 'unzipper'
 
 const getLibPath = (): string => path.join(process.cwd(), 'greenworks', 'lib')
 
@@ -60,9 +60,7 @@ const execTemplate = async (
     await fs.ensureDir(libPath)
   }
   console.log(`Creating ${libPath} to ${templatePath}`)
-  await fs.copy(libPath, templatePath, {
-    recursive: true,
-  })
+  await fs.copy(libPath, templatePath);
 
   console.log(`Chmod ${binary}`)
   await fs.chmod(binary, '755')
@@ -73,3 +71,4 @@ const execTemplate = async (
 export {
   getLibPath, extractZip, extractTar, extractArchive, execTemplate,
 }
+
