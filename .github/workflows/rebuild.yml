@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/cache@v4
         with:
-          path: sdk/
+          path: sdk
           key: steam-sdk
 
       - name: Download SDK if needed
@@ -61,7 +61,7 @@ jobs:
 
       - uses: actions/cache@v4
         with:
-          path: sdk/
+          path: sdk
           key: steam-sdk
 
         # linux
@@ -89,7 +89,12 @@ jobs:
           yarn config set python python2.7
           yarn config set msvs_version 2019
 
-      - run: git clone https://github.com/greenheartgames/greenworks greenworks
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: 'greenheartgames/greenworks'
+          ref: 'v0.21.0'
+          path: 'greenworks/'
 
       - run: gcc -v
       - run: g++ -v
