@@ -27,6 +27,18 @@ jobs:
           echo $JSON
           echo "matrix=${JSON//'%'/'%25'}" >> $GITHUB_OUTPUT
 
+  get-sdk:
+    name: Get Sdk from Valve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: sdk/
+          key: steam-sdk
+
+      - run: wget https://partner.steamgames.com/downloads/steamworks_sdk_162.zip -O sdk.zip
+      - run: 7z x sdk.zip -y
+
   build:
     continue-on-error: true
     name: Build
@@ -43,6 +55,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "24"
+
+      - uses: actions/cache@v4
+        with:
+          path: sdk.zip
+          key: steam-sdk
 
         # linux
       - if: matrix.os == 'ubuntu-latest'
@@ -75,9 +92,6 @@ jobs:
       - run: g++ -v
 
       # Extract
-      - run: wget https://partner.steamgames.com/downloads/steamworks_sdk_162.zip -O sdk.zip
-      - run: 7z x sdk.zip -y
-
       - run: mv sdk greenworks/deps/steamworks_sdk
       - run: yarn install
 
