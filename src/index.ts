@@ -6,12 +6,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable no-await-in-loop */
-import { execa } from 'execa'
-import path, { dirname } from 'path'
-import fs from 'fs-extra'
-import mri from 'mri'
-import { getAll } from 'modules-abi'
 import dns from 'dns'
+import { execa } from 'execa'
+import fs from 'fs-extra'
+import { getAll } from 'modules-abi'
+import mri from 'mri'
+import path, { dirname } from 'path'
 
 import { fileURLToPath } from 'url'
 
@@ -47,7 +47,7 @@ const getUnique = (versions: MbaVersion[], key: keyof MbaVersion): MbaVersion[] 
   .map((e) => versions[e])
 
 interface Args {
-  os: 'macos-latest' | 'ubuntu-latest' | 'windows-2019';
+  os: 'macos-latest' | 'ubuntu-latest' | 'windows-2022';
   runtime: 'nw.js' | 'electron' | 'node';
   arch: 'ia32' | 'x64';
   python: string;
@@ -61,7 +61,7 @@ const args = mri(argv)
 
 const association: Record<Args['os'], string> = {
   'ubuntu-latest': 'linux',
-  'windows-2019': 'win32',
+  'windows-2022': 'win32',
   'macos-latest': 'darwin',
 }
 
@@ -79,7 +79,7 @@ function getBinaryName(_arch: 'ia32' | 'x64'): string {
   let name = 'greenworks-'
 
   switch (os) {
-    case 'windows-2019':
+    case 'windows-2022':
       name += 'win'
       break
     case 'macos-latest':
@@ -185,7 +185,7 @@ function getBinaryName(_arch: 'ia32' | 'x64'): string {
 const electronRebuild = async (version: string): Promise<void> => {
   const { stderr, stdout } = await execa(
     path.resolve(
-      path.join(__dirname, '..', 'node_modules', '.bin', `node-gyp${os === 'windows-2019' ? '.cmd' : ''}`),
+      path.join(__dirname, '..', 'node_modules', '.bin', `node-gyp${os === 'windows-2022' ? '.cmd' : ''}`),
     ),
     [
       'rebuild',
@@ -204,7 +204,7 @@ const electronRebuild = async (version: string): Promise<void> => {
 const nodeRebuild = async (version: string): Promise<void> => {
   await execa(
     path.resolve(
-      path.join(__dirname, '..', 'node_modules', '.bin', `node-gyp${os === 'windows-2019' ? '.cmd' : ''}`),
+      path.join(__dirname, '..', 'node_modules', '.bin', `node-gyp${os === 'windows-2022' ? '.cmd' : ''}`),
     ),
     [
       'rebuild',
@@ -234,7 +234,7 @@ const nwjsRebuild = async (version: string): Promise<void> => {
 
   // `--python="${pythonPath}"`,
   await execa(
-    path.resolve(path.join(__dirname, '..', 'node_modules', '.bin', `nw-gyp${os === 'windows-2019' ? '.cmd' : ''}`)),
+    path.resolve(path.join(__dirname, '..', 'node_modules', '.bin', `nw-gyp${os === 'windows-2022' ? '.cmd' : ''}`)),
     nwgypArgs,
     {
       cwd: GREENWORKS_ROOT,
@@ -352,7 +352,7 @@ const build = async (matrix: any): Promise<void> => {
 
 const checkInternet = () => {
   return new Promise((resolve, reject) => {
-    dns.lookup('google.com', function(err) {
+    dns.lookup('google.com', function (err) {
       if (err && (err.code === "ENOTFOUND" || err.code === "EAI_AGAIN")) {
         return resolve(false);
       } else {
