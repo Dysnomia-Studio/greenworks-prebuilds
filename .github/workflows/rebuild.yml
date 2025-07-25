@@ -80,17 +80,17 @@ jobs:
 
         # windows
       - name: Add msbuild to PATH
-        run: yarn global add --production windows-build-tools --vs2019
+        run: yarn global add --production windows-build-tools --vs2022
         if: matrix.os == 'windows-2022'
 
       - if: matrix.runtime == 'nw.js'
         uses: actions/setup-python@v4
         with:
-          python-version: 'pypy2.7-v7.3.12'
+          python-version: 'pypy2.7' 
       - if: matrix.runtime == 'nw.js'
         run: |
           yarn config set python python2.7
-          yarn config set msvs_version 2019
+          yarn config set msvs_version 2022
 
       - name: Checkout
         uses: actions/checkout@v4
