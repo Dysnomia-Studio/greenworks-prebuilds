@@ -13,15 +13,14 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Checkout Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: 'yarn'
+          node-version: "24"
 
-      - run: yarn install
+      - run: npm ci
       - run: npx tsc
       - run: node ./dist/makeMatrix.js
       - id: set-matrix
@@ -35,11 +34,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: get-npm-version
         id: package-version
-        uses: Saionaro/extract-package-version@v1.2.1
+        uses: Saionaro/extract-package-version@v1.3.0
 
       - name: Fetch tags
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -71,13 +70,12 @@ jobs:
       matrix: ${{fromJson(needs.make_matrix.outputs.matrix)}}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Checkout Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: 'yarn'
+          node-version: "24"
 
         # linux
       - if: matrix.os == 'ubuntu-latest'
@@ -96,14 +94,6 @@ jobs:
         # uses: microsoft/setup-msbuild@v1.0.3
         if: matrix.os == 'windows-2019'
 
-        # nw.js
-      # - if: matrix.runtime == 'nw.js'
-      #   uses: MatteoH2O1999/setup-python@v1
-      #   with:
-      #     python-version: 2.7.18
-      #     allow-build: info
-      #     cache-build: true
-      #     cache: pip
       - if: matrix.runtime == 'nw.js'
         uses: actions/setup-python@v4
         with:
@@ -146,7 +136,7 @@ jobs:
 
       - name: get-npm-version
         id: package-version
-        uses: Saionaro/extract-package-version@v1.2.1
+        uses: Saionaro/extract-package-version@v1.3
 
       - name: "ls"
         shell: bash
@@ -161,7 +151,3 @@ jobs:
           tag: v${{ steps.package-version.outputs.version }}
           overwrite: true
           file_glob: true
-
-      - name: Keepalive Workflow
-        uses: gautamkrishnar/keepalive-workflow@1.1.0
-
