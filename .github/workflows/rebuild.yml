@@ -58,7 +58,7 @@ jobs:
         # windows
       - name: Add msbuild to PATH
         run: yarn global add --production windows-build-tools --vs2019
-        if: matrix.os == 'windows-2019'
+        if: matrix.os == 'windows-2022'
 
       - if: matrix.runtime == 'nw.js'
         uses: actions/setup-python@v4
