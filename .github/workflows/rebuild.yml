@@ -1,0 +1,28 @@
+name: Build
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  make_matrix:
+    name: Generate Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - run: npm ci
+      - run: npx tsc
+      - run: node ./dist/makeMatrix.js
+      - id: set-matrix
+        run: |
+          JSON=$(cat ./matrix.json)
+          echo $JSON
+          echo "matrix=${JSON//'%'/'%25'}" >> $GITHUB_OUTPUT
