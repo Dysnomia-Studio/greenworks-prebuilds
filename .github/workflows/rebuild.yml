@@ -97,7 +97,7 @@ jobs:
 
       - name: get-npm-version
         id: package-version
-        uses: Saionaro/extract-package-version@v1.3
+        uses: Saionaro/extract-package-version@v1.3.0
 
       - name: "ls"
         shell: bash
