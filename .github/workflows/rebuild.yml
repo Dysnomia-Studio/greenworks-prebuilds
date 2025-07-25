@@ -75,7 +75,7 @@ jobs:
       - run: g++ -v
 
       # Extract
-      - run: wget https://partner.steamgames.com/downloads/steamworks_sdk_162.zip -o sdk.zip
+      - run: wget https://partner.steamgames.com/downloads/steamworks_sdk_162.zip -O sdk.zip
       - run: 7z x sdk.zip -y
 
       - run: mv sdk greenworks/deps/steamworks_sdk
