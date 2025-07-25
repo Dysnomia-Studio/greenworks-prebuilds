@@ -26,3 +26,89 @@ jobs:
           JSON=$(cat ./matrix.json)
           echo $JSON
           echo "matrix=${JSON//'%'/'%25'}" >> $GITHUB_OUTPUT
+
+  build:
+    continue-on-error: true
+    name: Build
+    needs: [make_matrix]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.make_matrix.outputs.matrix)}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+        # linux
+      - if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install gcc-multilib g++-multilib
+
+        # mac
+      - if:
+          matrix.os == 'macos-latest'
+        run: brew install p7zip
+
+        # windows
+      - name: Add msbuild to PATH
+        run: yarn global add --production windows-build-tools --vs2019
+        if: matrix.os == 'windows-2019'
+
+      - if: matrix.runtime == 'nw.js'
+        uses: actions/setup-python@v4
+        with:
+          python-version: 'pypy2.7-v7.3.12'
+      - if: matrix.runtime == 'nw.js'
+        run: |
+          yarn config set python python2.7
+          yarn config set msvs_version 2019
+
+      - run: git clone https://github.com/greenheartgames/greenworks greenworks
+
+      - run: gcc -v
+      - run: g++ -v
+
+      # Extract
+      - run: 7z x sdk.zip -y -p${{ secrets.ZIP_PASSWORD }}
+
+      - run: mv sdk greenworks/deps/steamworks_sdk
+      - run: yarn install
+
+      - run: |
+          cd greenworks
+          # git apply ../diff.patch
+          yarn install
+          cat package.json
+
+      - run: ls
+
+      - run: npx tsc
+
+      - name: "Build"
+        shell: bash
+        run: |
+          node dist/index.js --os=${{matrix.os}} --runtime=${{matrix.runtime}} --arch=${{matrix.arch}}
+
+      - name: get-npm-version
+        id: package-version
+        uses: Saionaro/extract-package-version@v1.3
+
+      - name: "ls"
+        shell: bash
+        run:
+          ls greenworks/build/Release/
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: ./artifacts/*
+          tag: v${{ steps.package-version.outputs.version }}
+          overwrite: true
+          file_glob: true
