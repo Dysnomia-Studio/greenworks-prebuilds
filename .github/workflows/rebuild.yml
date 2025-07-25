@@ -75,7 +75,8 @@ jobs:
       - run: g++ -v
 
       # Extract
-      - run: 7z x sdk.zip -y -p${{ secrets.ZIP_PASSWORD }}
+      - run: wget https://partner.steamgames.com/downloads/steamworks_sdk_162.zip -o sdk.zip
+      - run: 7z x sdk.zip -y
 
       - run: mv sdk greenworks/deps/steamworks_sdk
       - run: yarn install
