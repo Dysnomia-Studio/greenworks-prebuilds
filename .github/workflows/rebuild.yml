@@ -42,7 +42,7 @@ jobs:
   build:
     continue-on-error: true
     name: Build
-    needs: [make_matrix]
+    needs: [make_matrix, get-sdk]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
