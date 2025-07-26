@@ -106,7 +106,16 @@ jobs:
       - if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install gcc-multilib g++-multilib binutils
+          sudo apt-get install gcc-multilib g++-multilib
+
+      - if: matrix.os == 'ubuntu-latest' && matrix.runtime == 'nw.js'
+        run: |
+          sudo apt-get install binutils build-essential binutils-gold
+          which ld
+          ls -ls $(which ld)
+          sudo rm /usr/bin/ld
+          sudo ln -s /usr/bin/ld.gold /usr/bin/ld
+          sudo chmod 777 /usr/bin/ld
 
         # mac
       - if: matrix.os == 'macos-latest'
