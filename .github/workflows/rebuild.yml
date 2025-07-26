@@ -91,11 +91,15 @@ jobs:
           yarn config set python python2.7
           yarn config set msvs_version 2022
 
+      - name: get-npm-version
+        id: package-version
+        uses: Saionaro/extract-package-version@v1.3.0
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           repository: 'greenheartgames/greenworks'
-          ref: 'v0.21.0'
+          ref: v${{ steps.package-version.outputs.version }}
           path: 'greenworks/'
 
       - run: gcc -v
@@ -120,10 +124,6 @@ jobs:
         shell: bash
         run: |
           node dist/index.js --os=${{matrix.os}} --runtime=${{matrix.runtime}} --arch=${{matrix.arch}}
-
-      - name: get-npm-version
-        id: package-version
-        uses: Saionaro/extract-package-version@v1.3.0
 
       - name: "ls"
         shell: bash
