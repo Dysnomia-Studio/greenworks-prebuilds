@@ -27,6 +27,39 @@ jobs:
           echo $JSON
           echo "matrix=${JSON//'%'/'%25'}" >> $GITHUB_OUTPUT
 
+  make_release:
+    name: Generate Release
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: get-npm-version
+        id: package-version
+        uses: Saionaro/extract-package-version@v1.3.0
+
+      - name: Fetch tags
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - id: checkTag
+        run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ steps.package-version.outputs.version }}" && echo "tagged=1" >> $GITHUB_OUTPUT || echo "tagged=0" >> $GITHUB_OUTPUT
+
+      - run: echo ${{ steps.checkTag.outputs.tagged }}
+
+      - name: Create Release
+        id: create_release
+        if: steps.checkTag.outputs.tagged == 0
+        uses: elgohr/Github-Release-Action@v5
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: v${{ steps.package-version.outputs.version }}
+          draft: false
+          prerelease: true
+
   get-sdk:
     name: Get Sdk from Valve
     runs-on: ubuntu-latest
@@ -45,7 +78,7 @@ jobs:
   build:
     continue-on-error: true
     name: Build
-    needs: [make_matrix, get-sdk]
+    needs: [make_matrix, make_release, get-sdk]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
