@@ -1,24 +1,20 @@
-# Greenworks prebuilds are **deprecated** - Switch to [Pipelab](https://pipelab.app) - [Github](https://github.com/CynToolkit/pipelab)
-Pipelab has built-in support for steamworks
-[![Pipelab Logo](https://raw.githubusercontent.com/CynToolkit/pipelab/refs/heads/develop/readme/full_white_bg_black_text.png)](https://pipelab.app)
-
 # Greenworks prebuilds
 
-![](https://badgen.net/github/release/electronforconstruct/greenworks-prebuilds)
-![](https://badgen.net/github/assets-dl/electronforconstruct/greenworks-prebuilds)
-![](https://badgen.net/github/license/electronforconstruct/greenworks-prebuilds)
-![](https://badgen.net/travis/electronforconstruct/greenworks-prebuilds)
+Automated builds for [greenworks](https://github.com/greenheartgames/greenworks/) to be used with Electron, Node.js or NW.js on MacOS (x64), Linux (x86/x64) and Windows (x86/x64).
+Originally built by [@Armaldio](https://github.com/Armaldio) for [ElectronForConstruct](https://github.com/ElectronForConstruct/greenworks-prebuilds), now mainly maintained by [@Elanis](https://github.com/Elanis).
 
-I'm providing automated builds for greenworks including a combination of Electron, Node.js, NW.js, Mac, Linux and Windows.
-Most common versions/abi are built.
+## Usage
 
-## Infos
-| | |
+See **Releases** to download the required .node files.
+You have to manually download the SDK from Valve's website. 
+
+## Release list
+
+| | 0.21.0 |
 | - | - |
+| Greenworks version | [0.21.0](https://github.com/greenheartgames/greenworks/releases/tag/v0.21.0) |
 | Steam SDK version | 1.62 |
 | OS | Windows, Mac, Linux |
 | Arch | x64, x86 |
 | Engine | NW.js, Electron, Node |
-| Abi | > 70 |
-
-
+| Abi | 108-137 |
