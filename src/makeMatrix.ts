@@ -7,31 +7,37 @@ const Archs = ['ia32', 'x64'];
 const Runtimes = ['nw.js', 'electron', 'node'];
 const OSs = ['macos-latest', 'ubuntu-latest', 'windows-2022'];
 
+export function makeMatrix() {
+	const matrix: { runtime: string, arch: string, os: string }[] = [];
+
+	OSs.forEach((os) => {
+		Runtimes.forEach((runtime) => {
+			Archs.forEach((arch) => {
+				if (!((os === 'macos-latest') && arch === 'ia32')) {
+					matrix.push({
+						runtime,
+						arch,
+						os,
+					});
+				}
+			});
+		});
+	});
+
+	return matrix;
+}
+
 const run = async (/* release: Release */): Promise<void> => {
-  const json: any = {};
-  const matrix: any[] = [];
+	const json: any = {};
+	const matrix: any[] = makeMatrix();
 
-  OSs.forEach((os) => {
-    Runtimes.forEach((runtime) => {
-      Archs.forEach((arch) => {
-        if (!((os === 'macos-latest') && arch === 'ia32')) {
-          matrix.push({
-            runtime,
-            arch,
-            os,
-          });
-        }
-      });
-    });
-  });
+	json.include = matrix;
 
-  json.include = matrix;
-
-  console.log(json);
-  console.log(matrix.length);
-  fs.writeFileSync(path.join(__dirname, '..', 'matrix.json'), JSON.stringify(json), 'utf8');
+	console.log(json);
+	console.log(matrix.length);
+	fs.writeFileSync(path.join(__dirname, '..', 'matrix.json'), JSON.stringify(json), 'utf8');
 }
 
 (async () => {
-  await run();
+	await run();
 })();

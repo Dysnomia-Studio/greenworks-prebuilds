@@ -15,3 +15,5 @@ artifacts/
 matrix.json
 .python-version
 versions.json
+
+output.md
