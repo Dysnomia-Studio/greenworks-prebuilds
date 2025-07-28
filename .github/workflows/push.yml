@@ -2,8 +2,6 @@ name: Build
 on:
   push:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   make_matrix:
