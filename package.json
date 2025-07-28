@@ -16,12 +16,12 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/ElectronForConstruct/greenworks-prebuilds/blob/master/LICENSE"
+      "url": "https://github.com/Dysnomia-Studio/greenworks-prebuilds/blob/main/LICENSE"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElectronForConstruct/greenworks-prebuilds.git"
+    "url": "git@github.com:Dysnomia-Studio/greenworks-prebuilds.git"
   },
   "dependencies": {
     "@electron/get": "^4.0.2",
