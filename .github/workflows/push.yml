@@ -45,7 +45,7 @@ jobs:
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - id: checkTag
-        run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ steps.package-version.outputs.version }}" && echo "tagged=1" >> $GITHUB_OUTPUT || echo "tagged=0" >> $GITHUB_OUTPUT
+        run: git show-ref --tags --verify --quiet -- "refs/tags/v0.22.0-unstable" && echo "tagged=1" >> $GITHUB_OUTPUT || echo "tagged=0" >> $GITHUB_OUTPUT
 
       - run: echo ${{ steps.checkTag.outputs.tagged }}
 
@@ -56,7 +56,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag: v${{ steps.package-version.outputs.version }}
+          tag: v0.22.0-unstable
           draft: false
           prerelease: true
 
@@ -140,8 +140,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: 'greenheartgames/greenworks'
-          ref: v${{ steps.package-version.outputs.version }}
+          repository: 'Elanis/greenworks'
+          ref: master
           path: 'greenworks/'
 
       - run: gcc -v
@@ -177,6 +177,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./artifacts/*
-          tag: v${{ steps.package-version.outputs.version }}
+          tag: v0.22.0-unstable
           overwrite: true
           file_glob: true
