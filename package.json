@@ -9,9 +9,9 @@
     "watch": "tsc -w",
     "build": "tsc",
     "dev": "yarn run dev:node",
-    "dev:node": "node dist/index.js --os=ubuntu-latest --runtime=node --arch=x64",
-    "dev:nwjs": "node dist/index.js --os=ubuntu-latest --runtime=nw.js --arch=x64",
-    "dev:electron": "node dist/index.js --os=ubuntu-latest --runtime=electron --arch=x64",
+    "dev:node": "node dist/index.js --os=ubuntu-22.04 --runtime=node --arch=x64",
+    "dev:nwjs": "node dist/index.js --os=ubuntu-22.04 --runtime=nw.js --arch=x64",
+    "dev:electron": "node dist/index.js --os=ubuntu-22.04 --runtime=electron --arch=x64",
     "lint": "eslint ."
   },
   "licenses": [

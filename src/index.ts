@@ -24,7 +24,7 @@ function slash(slashPath: string) {
 }
 
 interface Args {
-	os: 'macos-latest' | 'ubuntu-latest' | 'windows-2022';
+	os: 'macos-latest' | 'ubuntu-22.04' | 'windows-2022';
 	runtime: 'nw.js' | 'electron' | 'node';
 	arch: 'ia32' | 'x64';
 	python: string;
@@ -37,7 +37,7 @@ const argv = process.argv.slice(2);
 const args = mri(argv);
 
 const association: Record<Args['os'], string> = {
-	'ubuntu-latest': 'linux',
+	'ubuntu-22.04': 'linux',
 	'windows-2022': 'win32',
 	'macos-latest': 'darwin',
 };
@@ -62,7 +62,7 @@ function getBinaryName(_arch: 'ia32' | 'x64'): string {
 		case 'macos-latest':
 			name += 'osx'
 			break
-		case 'ubuntu-latest':
+		case 'ubuntu-22.04':
 			name += 'linux'
 			break
 		default:
