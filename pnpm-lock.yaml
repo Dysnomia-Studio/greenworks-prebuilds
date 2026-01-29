@@ -39,8 +39,8 @@ importers:
         specifier: ^3.6.8
         version: 3.6.8
       tar:
-        specifier: ^7.5.4
-        version: 7.5.4
+        specifier: ^7.5.7
+        version: 7.5.7
       unzipper:
         specifier: ^0.12.3
         version: 0.12.3
@@ -1829,8 +1829,8 @@ packages:
     resolution: {integrity: sha512-FCEhQ/4rE1zYv9rYXJw/msRqsnmlje5jHP6huWeBZ704jUTy02c5AZyWujpMR1ax6mVw9NyJMfuK2CMDWVIfgA==}
     deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
-  tar@7.5.4:
-    resolution: {integrity: sha512-AN04xbWGrSTDmVwlI4/GTlIIwMFk/XEv7uL8aa57zuvRy6s4hdBed+lVq2fAZ89XDa7Us3ANXcE3Tvqvja1kTA==}
+  tar@7.5.7:
+    resolution: {integrity: sha512-fov56fJiRuThVFXD6o6/Q354S7pnWMJIVlDBYijsTNx6jKSE4pvrDTs6lUnmGvNyfJwFQQwWy3owKz1ucIhveQ==}
     engines: {node: '>=18'}
 
   tinyglobby@0.2.14:
@@ -2437,7 +2437,7 @@ snapshots:
       minipass-pipeline: 1.2.4
       p-map: 7.0.3
       ssri: 12.0.0
-      tar: 7.5.4
+      tar: 7.5.7
       unique-filename: 4.0.0
 
   cacheable-lookup@7.0.0: {}
@@ -3487,7 +3487,7 @@ snapshots:
       nopt: 8.1.0
       proc-log: 5.0.0
       semver: 7.7.2
-      tar: 7.5.4
+      tar: 7.5.7
       tinyglobby: 0.2.14
       which: 5.0.0
     transitivePeerDependencies:
@@ -4008,7 +4008,7 @@ snapshots:
       fstream: 1.0.12
       inherits: 2.0.4
 
-  tar@7.5.4:
+  tar@7.5.7:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
