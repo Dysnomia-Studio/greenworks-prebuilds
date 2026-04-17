@@ -10,27 +10,32 @@ You have to manually download the SDK from Valve's website.
 
 ## Release list
 
-| | 0.21.0 |
-| - | - |
-| Greenworks version | [0.21.0](https://github.com/greenheartgames/greenworks/releases/tag/v0.21.0) |
-| Steam SDK version | 1.62 |
-| OS | Windows, Mac, Linux |
-| Arch | x64, x86 |
-| Engine | NW.js, Electron, Node |
-| Abi | 108-137 |
+| | 0.21.0 | 0.22.0 |
+| - | - | - |
+| Greenworks version | [0.21.0](https://github.com/greenheartgames/greenworks/releases/tag/v0.21.0) | [0.22.0](https://github.com/greenheartgames/greenworks/releases/tag/v0.22.0) |
+| Steam SDK version | 1.62 | 1.62 |
+| OS | Windows, Mac, Linux | Windows, Mac, Linux |
+| Arch | x64, x86 | x64, x86 |
+| Engine | NW.js, Electron, Node | NW.js, Electron, Node |
+| Abi | 108-137 | 108-146 |
 
 ## ABI Versions
 
 | Runtime | Version | ABI |
 | - | - | - |
-| nw.js | 0.101.2 | 137 |
+| nw.js | 0.110.1 | 141 |
+| nw.js | 0.105.0 | 137 |
 | nw.js | 0.100.0 | 131 |
 | nw.js | 0.94.0 | 127 |
 | nw.js | 0.87.0 | 120 |
 | nw.js | 0.82.0 | 115 |
 | nw.js | 0.76.0 | 111 |
 | nw.js | 0.70.0 | 108 |
-| electron | 38.0.0-alpha.11 | 139 |
+| electron | 42.0.0-alpha.6 | 146 |
+| electron | 41.2.1 | 145 |
+| electron | 40.9.1 | 143 |
+| electron | 39.8.8 | 140 |
+| electron | 38.8.6 | 139 |
 | electron | 37.2.4 | 136 |
 | electron | 36.7.3 | 135 |
 | electron | 35.7.2 | 133 |
@@ -47,7 +52,8 @@ You have to manually download the SDK from Valve's website.
 | electron | 23.3.13 | 113 |
 | electron | 22.3.27 | 110 |
 | electron | 21.4.4 | 109 |
-| node | 24.4.1 | 137 |
+| node | 25.9.0 | 141 |
+| node | 24.15.0 | 137 |
 | node | 23.11.1 | 131 |
 | node | 22.17.1 | 127 |
 | node | 21.7.3 | 120 |
