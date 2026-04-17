@@ -17,13 +17,12 @@ You have to manually download the SDK from Valve's website.
 | OS | Windows, Mac, Linux | Windows, Mac, Linux |
 | Arch | x64, x86 | x64, x86 |
 | Engine | NW.js, Electron, Node | NW.js, Electron, Node |
-| Abi | 108-137 | 108-146 |
+| Abi | 108-137 | 108-45 |
 
 ## ABI Versions
 
 | Runtime | Version | ABI |
 | - | - | - |
-| nw.js | 0.110.1 | 141 |
 | nw.js | 0.105.0 | 137 |
 | nw.js | 0.100.0 | 131 |
 | nw.js | 0.94.0 | 127 |
@@ -31,7 +30,6 @@ You have to manually download the SDK from Valve's website.
 | nw.js | 0.82.0 | 115 |
 | nw.js | 0.76.0 | 111 |
 | nw.js | 0.70.0 | 108 |
-| electron | 42.0.0-alpha.6 | 146 |
 | electron | 41.2.1 | 145 |
 | electron | 40.9.1 | 143 |
 | electron | 39.8.8 | 140 |
