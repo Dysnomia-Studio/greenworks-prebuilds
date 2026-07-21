@@ -35,7 +35,7 @@
     "node-abi": "^4.28.0",
     "node-gyp": "^12.2.0",
     "nw-gyp": "^3.6.8",
-    "tar": "^7.5.13",
+    "tar": "^7.5.16",
     "unzipper": "^0.12.3"
   },
   "devDependencies": {
